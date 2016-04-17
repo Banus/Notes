@@ -1,0 +1,140 @@
+% Inspired by: http://tex.stackexchange.com/questions/126562/document-class-for-
+% writing-class-note
+
+
+\documentclass{article}
+\usepackage{amsmath}
+
+
+% user-defined operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+
+\makeatletter
+
+\title{Training losses}
+\author{Emanuele Plebani}
+\begin{document}
+\maketitle
+
+\section{Linear classifiers}
+
+In this section we consider loss functions that can applied to \emph{linear
+discriminant} classifiers (see \cite{Gupta2014}) on a generic feature
+representation $\mathbf{x}$:
+
+\begin{equation*}
+c = \argmax_c \mathbf{W}\mathbf{x}
+\end{equation*}
+
+where $c$ is the index of the maximum value on the right side. An optional bias
+term is encoded by an additional $x$ coordinate set to 1. Problems reconducible
+to this form include \emph{Softmax} and \emph{1-vs-all SVM}.
+
+
+\subsection{Probability estimates}
+
+Many loss functions expect a predicted probability as classifier output. Some
+choices for the probability interpretation of a linear classifier are presented.
+
+
+\subsubsection{Softmax}
+
+The \emph{softmax} function convert the linear discriminant in a set of
+probabilities:
+
+\begin{equation*}
+q_j(\mathbf{x}) = \frac{e^{\mathbf{w_j} \cdot \mathbf{x}}}
+  {\sum_{c=0}^{C} e^{\mathbf{w_c} \cdot \mathbf{x}}}
+\end{equation*}
+
+where $C$ is the number of classes and $\mathbf{W} = \left[ \mathbf{w}_1, ...,
+\mathbf{w}_C \right]$. The softmax function reduces to the logistic for binary
+classification problems ($C = 2$).
+
+
+\subsubsection{Sigmoid}
+
+Each classifier is taken in isolation and the probability of the prediction is
+represented by a sigmoid over the linear output:
+
+\begin{equation*}
+q_j(\mathbf{x}) = \sigma(\mathbf{w_j} \cdot \mathbf{x}) = \frac{1}{1 + 
+  e^{\mathbf{w_j} \cdot \mathbf{x}} }
+\end{equation*}
+
+Differently from softmax, the probabilities are not necessarily normalized. This
+is the standard probability interpretation for binary classifiers, e.g. SVMs
+\cite{Platt1999}.
+
+
+\subsection{Loss functions}
+
+The loss functions described here are computed on a single example $\mathbf{x}$.
+The loss for a set of examples is the sum of the individual losses:
+
+\begin{equation*}
+\mathcal{L} = \sum_{i} \mathcal{L}_i(\mathbf{x}_i)
+\end{equation*}
+
+The ground truth for the problem can have the following formats:
+
+\begin{itemize}
+
+\item probability distribution $p_j(\mathbf{x})$ over the classes $j = 1, ..., C$
+(\emph{soft labels})
+
+\item ground truth label $y_i \in {1, ..., C}$ (\emph{hard labels})
+
+\end{itemize}
+
+
+\subsubsection{Cross-entropy}
+
+The \emph{cross-entropy loss} is defined as the cross entropy $H(p,q)$ between
+the empirical distribution $p$ of the ground truth labels and the distribution
+$q$ predicted by the model:
+
+\begin{equation*}
+\mathcal{L}_i = H(p(\mathbf{x}_i), q(\mathbf{x}_i)) = 
+  -\sum_{j=0}^{C} p_{ij} \log q_{ij}
+\end{equation*}
+
+where $p_ij = p(\mathbf{x}_i)$. Minimizing the cross-entropy is equivalent to
+minimize the Kullback-Leiber divergence between the true and the predicted
+distributions, as they differ by a term that depends only on $p$ and thus
+constant with respect to the learning problem:
+
+\begin{equation*}
+D_{KL}(p\|q) = H(p, q) - H(p) 
+\end{equation*}
+
+In the case $p_{iy_i} = 1$ if $y_i$ is the index of the true class (perfect
+certainty), the loss maximizes the probability of predicting the true class:
+
+\begin{equation*}
+\mathcal{L}_i = - \log q_{iy_i}
+\end{equation*}
+
+
+\subsubsection{Hinge loss}
+
+In the general multiclass problem, the \emph{hinge loss} has the form
+\cite{Crammer2001}:
+
+\begin{equation*}
+\mathcal{L}_i = \max_{j \neq y_i}(0, q_{ij} - q_{iy_i} + \delta)
+\end{equation*}
+
+where $\delta$ is the margin (usually $\delta = 1$). The loss can be used
+directy on the linear discriminant: in that case, $q_{ij} = \mathbf{w}_j
+\mathbf{x}_i$.
+
+% TODO: see if the binary classification case reduces to the ordinary hinge loss
+
+
+\bibliography{notes} 
+\bibliographystyle{ieeetr}
+
+\end{document}
+

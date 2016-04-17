@@ -1,0 +1,33 @@
+@article{Gupta2014,
+abstract = {Classification problems with thousands or more classes often have a large range of classconfusabilities, and we show that the more-confusable classes add more noise to the empirical loss that is minimized during training. We propose an online solution that reduces the effect of highly confusable classes in training the classifier parameters, and focuses the training on pairs of classes that are easier to differentiate at any given time in the training. We also show that the adagrad method, recently proposed for automatically decreasing step sizes for convex stochastic gradient descent, can also be profitably applied to the nonconvex joint training of supervised dimensionality reduction and linear classifiers as done in Wsabie. Experiments on ImageNet benchmark data sets and proprietary image recognition problems with 15,000 to 97,000 classes show substantial gains in classification accuracy compared to one-vs-all linear SVMs and Wsabie. {\textcopyright} 2014 Maya R. Gupta.},
+author = {Gupta, Maya R. and Bengio, Samy and Weston, Jason},
+isbn = {1532-4435},
+issn = {15337928},
+journal = {Journal of Machine Learning Research},
+keywords = {classification,large-scale,multiclass,online learning,stochastic gradient},
+pages = {1461--1492},
+title = {{Training Highly Multiclass Classifiers}},
+url = {http://jmlr.org/papers/v15/gupta14a.html},
+volume = {15},
+year = {2014}
+}
+@article{Platt1999,
+abstract = {The output of a classifier should be a calibrated posterior probability to enable post-processing. Standard SVMs do not provide such probabilities. One method to create probabilities is to directly train a kernel classifier with a logit link function and a regularized maximum likelihood score. However, training with a maximum likelihood score will produce non-sparse kernel machines. Instead, we train an SVM, then train the parameters of an additional sigmoid function to map the SVM outputs into probabilities. This chapter compares classification error rate and likelihood scores for an SVM plus sigmoid versus a kernel method trained with a regularized likelihood error function. These methods are tested on three data-mining-style data sets. The SVM+sigmoid yields probabilities of comparable quality to the regularized maximum likelihood kernel method, while still retaining the sparseness of the SVM.},
+author = {Platt, John C.},
+journal = {Advances in Large-Margin Classifiers},
+title = {{Probabilistic Outputs for Support Vector Machines and Comparisons to Regularized Likelihood Methods}},
+url = {http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.41.1639{\&}g},
+year = {1999}
+}
+@article{Crammer2001,
+abstract = {In this paper we describe the algorithmic implementation of multiclass kernel-$\backslash$nbased vector machines. Our starting point is a generalized notion of the margin$\backslash$nto multiclass problems. Using this notion we cast multiclass categorization$\backslash$nproblems as a constrained optimization problem with a quadratic objective$\backslash$nfunction. Unlike most of previous approaches which typically decompose a$\backslash$nmulticlass problem into multiple independent binary classication tasks, our$\backslash$nnotion of margin yields a direct method for training multiclass predictors. By$\backslash$nusing the dual of the optimization problem we are able to incorporate kernels$\backslash$nwith a compact set of constraints and decompose the dual problem into multiple$\backslash$noptimization problems of reduced size. We describe an ecient xed-point algorithm$\backslash$nfor solving the reduced optimization problems and prove its convergence. We then$\backslash$ndiscuss technical details that yield signicant running time improvements for$\backslash$nlarge datasets. Finally, we describe various experiments with our approach$\backslash$ncomparing it to previously studied kernel-based methods. Our experiments$\backslash$nindicate that for multiclass problems we attain state-of-the-art accuracy.},
+author = {Crammer, Koby and Singer, Yoram},
+doi = {10.1162/15324430260185628},
+isbn = {1532-4435},
+issn = {15324435},
+journal = {Journal of Machine Learning Research (JMLR)},
+pages = {265--292},
+title = {{On The Algorithmic Implementation of Multiclass Kernel-based Vector Machines}},
+volume = {2},
+year = {2001}
+}
